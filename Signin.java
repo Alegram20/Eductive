@@ -45,6 +45,7 @@ public class Signin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(33, 166, 230));
@@ -255,7 +256,7 @@ public class Signin extends javax.swing.JFrame {
     private javax.swing.JTextField email;
     private javax.swing.JLabel exit;
     private javax.swing.JLabel exit1;
-    private javax.swing.JTextField id;
+    public static javax.swing.JTextField id;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
