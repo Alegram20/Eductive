@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2021 at 07:29 PM
+-- Generation Time: May 23, 2021 at 04:38 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -39,6 +39,44 @@ CREATE TABLE `manager` (
 
 INSERT INTO `manager` (`id`, `name`, `surname`) VALUES
 (1, 'Alexandros', 'Grammatikopoulos');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent`
+--
+
+CREATE TABLE `parent` (
+  `id` int(9) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `surname` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `parent`
+--
+
+INSERT INTO `parent` (`id`, `name`, `surname`) VALUES
+(4, 'Alex', 'Makrigiannis');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `professor`
+--
+
+CREATE TABLE `professor` (
+  `id` int(9) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `surname` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `professor`
+--
+
+INSERT INTO `professor` (`id`, `name`, `surname`) VALUES
+(2, 'Eirilena', 'Tsiaousi');
 
 -- --------------------------------------------------------
 
@@ -92,6 +130,18 @@ ALTER TABLE `manager`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `parent`
+--
+ALTER TABLE `parent`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `professor`
+--
+ALTER TABLE `professor`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
@@ -122,6 +172,18 @@ ALTER TABLE `users`
 --
 ALTER TABLE `manager`
   ADD CONSTRAINT `manager_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `parent`
+--
+ALTER TABLE `parent`
+  ADD CONSTRAINT `parent_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `professor`
+--
+ALTER TABLE `professor`
+  ADD CONSTRAINT `professor_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `student`
