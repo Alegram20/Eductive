@@ -159,7 +159,7 @@ public class Signin extends javax.swing.JFrame {
              if (rs.next())
           {
              JOptionPane.showMessageDialog(this,"Successful Login!");
-              Manager a = new Manager();
+              Admin a = new Admin();
              a.setVisible(true);
              this.dispose();
               
@@ -184,6 +184,57 @@ public class Signin extends javax.swing.JFrame {
           {
              JOptionPane.showMessageDialog(this,"Successful Login!");
               Student a = new Student();
+             a.setVisible(true);
+             this.dispose();
+              
+          }
+          else
+          {
+             JOptionPane.showMessageDialog(this,"Id, Email or role of user are incorrect","Error",JOptionPane.ERROR_MESSAGE); 
+             id.setText("");
+             email.setText("");
+                     
+          }
+         }
+               
+                if(role.getSelectedItem().equals("Professor"))
+         {
+             ps=con.prepareStatement("select * from users where id=? and email=? and usertype=? ");
+             ps.setInt(1, Id);
+             ps.setString(2, Email);
+             ps.setString(3, Role);
+             rs = ps.executeQuery();
+             
+             if (rs.next())
+          {
+             JOptionPane.showMessageDialog(this,"Successful Login!");
+              Professor a = new Professor();
+             a.setVisible(true);
+             this.dispose();
+              
+          }
+          else
+          {
+             JOptionPane.showMessageDialog(this,"Id, Email or role of user are incorrect","Error",JOptionPane.ERROR_MESSAGE); 
+             id.setText("");
+             email.setText("");
+                     
+          }
+         }
+        
+                
+                if(role.getSelectedItem().equals("Parent"))
+         {
+             ps=con.prepareStatement("select * from users where id=? and email=? and usertype=? ");
+             ps.setInt(1, Id);
+             ps.setString(2, Email);
+             ps.setString(3, Role);
+             rs = ps.executeQuery();
+             
+             if (rs.next())
+          {
+             JOptionPane.showMessageDialog(this,"Successful Login!");
+              Parent a = new Parent();
              a.setVisible(true);
              this.dispose();
               

@@ -11,12 +11,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
-public class Manager extends javax.swing.JFrame {
+public class Admin extends javax.swing.JFrame {
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
     
-    public Manager() {
+    public Admin() {
         initComponents();
         welcomeuser();
     }
@@ -44,9 +44,9 @@ public class Manager extends javax.swing.JFrame {
                     
                     
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
@@ -101,7 +101,7 @@ public class Manager extends javax.swing.JFrame {
         jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 580, 60, -1));
 
         ManagerPage.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        ManagerPage.setText("Manager Page");
+        ManagerPage.setText("Admin Page");
         jPanel1.add(ManagerPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 130, -1));
 
         logout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -223,21 +223,35 @@ public class Manager extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Manager().setVisible(true);
+                new Admin().setVisible(true);
             }
         });
     }
