@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2021 at 04:38 PM
+-- Generation Time: Jun 04, 2021 at 12:26 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -24,20 +24,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `manager`
+-- Table structure for table `admin`
 --
 
-CREATE TABLE `manager` (
+CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `manager`
+-- Dumping data for table `admin`
 --
 
-INSERT INTO `manager` (`id`, `name`, `surname`) VALUES
+INSERT INTO `admin` (`id`, `name`, `surname`) VALUES
 (1, 'Alexandros', 'Grammatikopoulos');
 
 -- --------------------------------------------------------
@@ -76,7 +76,9 @@ CREATE TABLE `professor` (
 --
 
 INSERT INTO `professor` (`id`, `name`, `surname`) VALUES
-(2, 'Eirilena', 'Tsiaousi');
+(2, 'Eirilena', 'Tsiaousi'),
+(5, 'Nick', 'Apostolopoulos'),
+(8, 'Test', 'Test1');
 
 -- --------------------------------------------------------
 
@@ -95,7 +97,9 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `name`, `surname`) VALUES
-(3, 'Ioannis', 'Makantasis');
+(3, 'Ioannis', 'Makantasis'),
+(7, 'Nick ', 'Kalos'),
+(9, 'Marinos', 'Alex');
 
 -- --------------------------------------------------------
 
@@ -106,7 +110,7 @@ INSERT INTO `student` (`id`, `name`, `surname`) VALUES
 CREATE TABLE `users` (
   `id` int(9) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `usertype` set('Manager','Professor','Student','Parent') NOT NULL
+  `usertype` set('Admin','Professor','Student','Parent') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -114,19 +118,24 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `usertype`) VALUES
-(1, 'alex@ceid.gr', 'Manager'),
+(1, 'alex@ceid.gr', 'Admin'),
 (2, 'eirhlena@ceid.gr', 'Professor'),
 (3, 'mak@ceid.gr', 'Student'),
-(4, 'makri@ceid.gr', 'Parent');
+(4, 'makri@ceid.gr', 'Parent'),
+(5, 'nicka@ceid.gr', 'Professor'),
+(6, ' j@ceid.gr', 'Professor'),
+(7, ' kal@ceid.gr', 'Student'),
+(8, ' test1@ceid,gr', 'Professor'),
+(9, ' marin@ceid.gr', 'Student');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `manager`
+-- Indexes for table `admin`
 --
-ALTER TABLE `manager`
+ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -161,16 +170,16 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `manager`
+-- Constraints for table `admin`
 --
-ALTER TABLE `manager`
+ALTER TABLE `admin`
   ADD CONSTRAINT `manager_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
 
 --
