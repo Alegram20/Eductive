@@ -72,7 +72,6 @@ public class Student extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         calendar = new javax.swing.JButton();
         announcement = new javax.swing.JButton();
-        library = new javax.swing.JButton();
         homework = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -143,7 +142,7 @@ public class Student extends javax.swing.JFrame {
         calendar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         calendar.setForeground(new java.awt.Color(255, 255, 255));
         calendar.setText("Calendar");
-        jPanel2.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 190, 90));
+        jPanel2.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 190, 90));
 
         announcement.setBackground(new java.awt.Color(33, 166, 230));
         announcement.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -154,19 +153,13 @@ public class Student extends javax.swing.JFrame {
                 announcementActionPerformed(evt);
             }
         });
-        jPanel2.add(announcement, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 190, 90));
-
-        library.setBackground(new java.awt.Color(33, 166, 230));
-        library.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        library.setForeground(new java.awt.Color(255, 255, 255));
-        library.setText("e-Library");
-        jPanel2.add(library, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 190, 90));
+        jPanel2.add(announcement, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, 190, 90));
 
         homework.setBackground(new java.awt.Color(33, 166, 230));
         homework.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         homework.setForeground(new java.awt.Color(255, 255, 255));
         homework.setText("Homework");
-        jPanel2.add(homework, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 180, 90));
+        jPanel2.add(homework, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 180, 90));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 800, 660));
 
@@ -241,7 +234,6 @@ public class Student extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton library;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel name;

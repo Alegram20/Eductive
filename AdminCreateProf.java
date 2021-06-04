@@ -1,6 +1,7 @@
 
 package edu;
 
+import static edu.Signin.id;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,12 +12,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
-public class Professor extends javax.swing.JFrame {
+public class AdminCreateProf extends javax.swing.JFrame {
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
     
-    public Professor() {
+    public AdminCreateProf() {
         initComponents();
         welcomeuser();
     }
@@ -31,7 +32,7 @@ public class Professor extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/eductivedb","root","");
-            pst=con.prepareStatement("select name, surname from professor where id = ?");
+            pst=con.prepareStatement("select name, surname from admin where id = ?");
             pst.setString(1, id);
             rs=pst.executeQuery();
             
@@ -44,9 +45,9 @@ public class Professor extends javax.swing.JFrame {
                     
                     
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Professor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminCreateProf.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Professor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminCreateProf.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
@@ -63,22 +64,22 @@ public class Professor extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
-        exit = new javax.swing.JLabel();
+        Back = new javax.swing.JLabel();
         ManagerPage = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
-        welcome = new javax.swing.JLabel();
         surname = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
+        ManagerPage1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        Courses = new javax.swing.JButton();
-        announcement = new javax.swing.JButton();
-        calendar = new javax.swing.JButton();
-        library = new javax.swing.JButton();
         profaccount = new javax.swing.JButton();
-        library1 = new javax.swing.JButton();
+        tmail = new javax.swing.JTextField();
+        ttype = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        AllProfessors = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -91,19 +92,20 @@ public class Professor extends javax.swing.JFrame {
         logo.setText("EDUCTIVE");
         jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, -1));
 
-        exit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/icons8_exit_30px_1.png"))); // NOI18N
-        exit.setText("Exit");
-        exit.addMouseListener(new java.awt.event.MouseAdapter() {
+        Back.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Back.setIcon(new javax.swing.ImageIcon("C:\\Users\\giann\\Documents\\NetBeansProjects\\Eductive\\build\\classes\\edu\\icons8_back_to_30px.png")); // NOI18N
+        Back.setText("Back");
+        Back.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                exitMouseClicked(evt);
+                BackMouseClicked(evt);
             }
         });
-        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 580, 60, -1));
+        jPanel1.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 580, 70, -1));
 
-        ManagerPage.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        ManagerPage.setText("Professor Page");
-        jPanel1.add(ManagerPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 130, -1));
+        ManagerPage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ManagerPage.setForeground(new java.awt.Color(255, 255, 255));
+        ManagerPage.setText("Create Professor Account");
+        jPanel1.add(ManagerPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 150, -1));
 
         logout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/icons8_sign_out_30px.png"))); // NOI18N
@@ -115,10 +117,6 @@ public class Professor extends javax.swing.JFrame {
         });
         jPanel1.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 90, -1));
 
-        welcome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        welcome.setText("Welcome");
-        jPanel1.add(welcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 70, 20));
-
         surname.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         surname.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(surname, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 150, 20));
@@ -126,6 +124,10 @@ public class Professor extends javax.swing.JFrame {
         name.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         name.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 150, 20));
+
+        ManagerPage1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ManagerPage1.setText("Admin Page");
+        jPanel1.add(ManagerPage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 130, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 660));
 
@@ -144,46 +146,45 @@ public class Professor extends javax.swing.JFrame {
         jLabel3.setText("School Managment Application");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 270, 30));
 
-        Courses.setBackground(new java.awt.Color(33, 166, 230));
-        Courses.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Courses.setForeground(new java.awt.Color(255, 255, 255));
-        Courses.setText("My Courses");
-        jPanel2.add(Courses, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 190, 90));
-
-        announcement.setBackground(new java.awt.Color(33, 166, 230));
-        announcement.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        announcement.setForeground(new java.awt.Color(255, 255, 255));
-        announcement.setText("Edit Courses");
-        announcement.addActionListener(new java.awt.event.ActionListener() {
+        profaccount.setBackground(new java.awt.Color(33, 166, 230));
+        profaccount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        profaccount.setForeground(new java.awt.Color(255, 255, 255));
+        profaccount.setText("Create Professor Account");
+        profaccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                announcementActionPerformed(evt);
+                profaccountActionPerformed(evt);
             }
         });
-        jPanel2.add(announcement, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 180, 90));
+        jPanel2.add(profaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 530, 210, 60));
 
-        calendar.setBackground(new java.awt.Color(33, 166, 230));
-        calendar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        calendar.setForeground(new java.awt.Color(255, 255, 255));
-        calendar.setText("Personal Calendar");
-        jPanel2.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 190, 90));
+        tmail.setBackground(new java.awt.Color(33, 166, 230));
+        tmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tmail.setText(" ");
+        jPanel2.add(tmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 310, 40));
 
-        library.setBackground(new java.awt.Color(33, 166, 230));
-        library.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        library.setForeground(new java.awt.Color(255, 255, 255));
-        library.setText("Test");
-        jPanel2.add(library, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, 180, 90));
+        ttype.setBackground(new java.awt.Color(33, 166, 230));
+        ttype.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ttype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Professor" }));
+        jPanel2.add(ttype, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, 310, 40));
 
-        profaccount.setBackground(new java.awt.Color(33, 166, 230));
-        profaccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        profaccount.setForeground(new java.awt.Color(255, 255, 255));
-        profaccount.setText("Insert Course");
-        jPanel2.add(profaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 180, 90));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Type of User");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 110, 30));
 
-        library1.setBackground(new java.awt.Color(33, 166, 230));
-        library1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        library1.setForeground(new java.awt.Color(255, 255, 255));
-        library1.setText("Homework");
-        jPanel2.add(library1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, 190, 90));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Email");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 90, 30));
+
+        AllProfessors.setBackground(new java.awt.Color(0, 0, 0));
+        AllProfessors.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        AllProfessors.setForeground(new java.awt.Color(255, 255, 255));
+        AllProfessors.setText("All Professors");
+        AllProfessors.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AllProfessorsActionPerformed(evt);
+            }
+        });
+        jPanel2.add(AllProfessors, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 600, -1, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 800, 660));
 
@@ -191,9 +192,11 @@ public class Professor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_exitMouseClicked
+    private void BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseClicked
+         Admin a = new Admin();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BackMouseClicked
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
        
@@ -209,9 +212,52 @@ public class Professor extends javax.swing.JFrame {
         
     }    
          
-    private void announcementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_announcementActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_announcementActionPerformed
+    private void profaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profaccountActionPerformed
+          String Email = tmail.getText();
+          String Role = (String) ttype.getSelectedItem();
+        
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con=DriverManager.getConnection("jdbc:mysql://localhost/eductivedb","root","");
+            
+              if(ttype.getSelectedItem().equals("Professor"))
+         {
+             pst =con.prepareStatement("insert into users (email,usertype) values (?,?) ");
+             
+             
+             pst.setString(1, Email);
+             pst.setString(2, Role);
+             pst.executeUpdate();
+             
+          
+             JOptionPane.showMessageDialog(this,"Professor Account has been created successfully!");
+             
+             Admin a = new Admin();
+             a.setVisible(true);
+             this.dispose();
+            
+              
+          
+             
+            
+             
+                     
+          }
+         
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Signin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Signin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_profaccountActionPerformed
+
+    private void AllProfessorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllProfessorsActionPerformed
+        AdminCreateProf_Professors a = new AdminCreateProf_Professors();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_AllProfessorsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,13 +276,13 @@ public class Professor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Professor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCreateProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Professor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCreateProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Professor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCreateProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Professor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCreateProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -274,29 +320,29 @@ public class Professor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Professor().setVisible(true);
+                new AdminCreateProf().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Courses;
+    private javax.swing.JButton AllProfessors;
+    private javax.swing.JLabel Back;
     private javax.swing.JLabel ManagerPage;
-    private javax.swing.JButton announcement;
-    private javax.swing.JButton calendar;
-    private javax.swing.JLabel exit;
+    private javax.swing.JLabel ManagerPage1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton library;
-    private javax.swing.JButton library1;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel name;
     private javax.swing.JButton profaccount;
     private javax.swing.JLabel surname;
-    private javax.swing.JLabel welcome;
+    private javax.swing.JTextField tmail;
+    private javax.swing.JComboBox<String> ttype;
     // End of variables declaration//GEN-END:variables
 }

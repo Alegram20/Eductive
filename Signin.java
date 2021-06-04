@@ -91,7 +91,7 @@ public class Signin extends javax.swing.JFrame {
 
         role.setBackground(new java.awt.Color(33, 166, 230));
         role.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Manager", "Professor", "Student", "Parent" }));
+        role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Professor", "Student", "Parent" }));
         jPanel2.add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, 310, 40));
 
         jButton1.setBackground(new java.awt.Color(33, 166, 230));
@@ -148,7 +148,7 @@ public class Signin extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con=DriverManager.getConnection("jdbc:mysql://localhost/eductivedb","root","");
             
-              if(role.getSelectedItem().equals("Manager"))
+              if(role.getSelectedItem().equals("Admin"))
          {
              ps=con.prepareStatement("select * from users where id=? and email=? and usertype=? ");
              ps.setInt(1, Id);

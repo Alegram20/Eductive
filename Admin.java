@@ -1,4 +1,3 @@
-
 package edu;
 
 import java.sql.Connection;
@@ -31,7 +30,7 @@ public class Admin extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/eductivedb","root","");
-            pst=con.prepareStatement("select name, surname from manager where id = ?");
+            pst=con.prepareStatement("select name, surname from admin where id = ?");
             pst.setString(1, id);
             rs=pst.executeQuery();
             
@@ -76,7 +75,6 @@ public class Admin extends javax.swing.JFrame {
         staccount = new javax.swing.JButton();
         announcement = new javax.swing.JButton();
         calendar = new javax.swing.JButton();
-        library = new javax.swing.JButton();
         profaccount = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -147,7 +145,12 @@ public class Admin extends javax.swing.JFrame {
         staccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         staccount.setForeground(new java.awt.Color(255, 255, 255));
         staccount.setText("Create Student Account");
-        jPanel2.add(staccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 190, 90));
+        staccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staccountActionPerformed(evt);
+            }
+        });
+        jPanel2.add(staccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 190, 90));
 
         announcement.setBackground(new java.awt.Color(33, 166, 230));
         announcement.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -158,25 +161,24 @@ public class Admin extends javax.swing.JFrame {
                 announcementActionPerformed(evt);
             }
         });
-        jPanel2.add(announcement, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 190, 90));
+        jPanel2.add(announcement, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, 190, 90));
 
         calendar.setBackground(new java.awt.Color(33, 166, 230));
         calendar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         calendar.setForeground(new java.awt.Color(255, 255, 255));
         calendar.setText("School Calendar");
-        jPanel2.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, 190, 90));
-
-        library.setBackground(new java.awt.Color(33, 166, 230));
-        library.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        library.setForeground(new java.awt.Color(255, 255, 255));
-        library.setText("e-Library");
-        jPanel2.add(library, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 190, 90));
+        jPanel2.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, 190, 90));
 
         profaccount.setBackground(new java.awt.Color(33, 166, 230));
         profaccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         profaccount.setForeground(new java.awt.Color(255, 255, 255));
         profaccount.setText("Create Professor Account");
-        jPanel2.add(profaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 180, 90));
+        profaccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profaccountActionPerformed(evt);
+            }
+        });
+        jPanel2.add(profaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 180, 90));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 800, 660));
 
@@ -202,9 +204,21 @@ public class Admin extends javax.swing.JFrame {
         
     }    
          
+    private void profaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profaccountActionPerformed
+        AdminCreateProf a = new AdminCreateProf();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_profaccountActionPerformed
+
     private void announcementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_announcementActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_announcementActionPerformed
+
+    private void staccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staccountActionPerformed
+         AdminCreateStu a = new AdminCreateStu();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_staccountActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,7 +280,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton library;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel name;

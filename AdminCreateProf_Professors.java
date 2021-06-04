@@ -1,24 +1,33 @@
 
 package edu;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 
-public class Professor extends javax.swing.JFrame {
+public class AdminCreateProf_Professors extends javax.swing.JFrame {
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
     
-    public Professor() {
+    public AdminCreateProf_Professors() {
         initComponents();
         welcomeuser();
+        tableprof();
     }
 
     
@@ -31,7 +40,7 @@ public class Professor extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/eductivedb","root","");
-            pst=con.prepareStatement("select name, surname from professor where id = ?");
+            pst=con.prepareStatement("select name, surname from admin where id = ?");
             pst.setString(1, id);
             rs=pst.executeQuery();
             
@@ -44,14 +53,64 @@ public class Professor extends javax.swing.JFrame {
                     
                     
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Professor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminCreateProf_Professors.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Professor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminCreateProf_Professors.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
         
     }
+    
+    
+    
+    void tableprof(){
+        
+        String user="Professor";
+        
+        try {
+              Class.forName("com.mysql.cj.jdbc.Driver");
+              con=DriverManager.getConnection("jdbc:mysql://localhost/eductivedb","root","");
+              pst=con.prepareStatement("select * from users where usertype=?");
+              pst.setString(1, user);
+              rs=pst.executeQuery();
+              
+            
+           
+              DefaultTableModel Df = (DefaultTableModel)Professors.getModel();
+              Df.setRowCount(0);
+              
+              
+              while(rs.next())
+              {
+                  Vector v2 = new Vector();
+               
+               for(int a=1; a<=3; a++)
+               {
+                   v2.add(rs.getString("id")); 
+                   v2.add(rs.getString("email"));
+                    v2.add(rs.getString("usertype"));
+                     
+                         
+               }
+               
+               
+                Df.addRow(v2);
+                  
+                  
+              }
+          
+   
+          
+          
+          
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(AdminCreateProf_Professors.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(AdminCreateProf_Professors.class.getName()).log(Level.SEVERE, null, ex);
+          }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,22 +122,18 @@ public class Professor extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
-        exit = new javax.swing.JLabel();
+        Back = new javax.swing.JLabel();
         ManagerPage = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
-        welcome = new javax.swing.JLabel();
         surname = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
+        ManagerPage1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        Courses = new javax.swing.JButton();
-        announcement = new javax.swing.JButton();
-        calendar = new javax.swing.JButton();
-        library = new javax.swing.JButton();
-        profaccount = new javax.swing.JButton();
-        library1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Professors = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -91,19 +146,20 @@ public class Professor extends javax.swing.JFrame {
         logo.setText("EDUCTIVE");
         jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, -1));
 
-        exit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/icons8_exit_30px_1.png"))); // NOI18N
-        exit.setText("Exit");
-        exit.addMouseListener(new java.awt.event.MouseAdapter() {
+        Back.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Back.setIcon(new javax.swing.ImageIcon("C:\\Users\\giann\\Documents\\NetBeansProjects\\Eductive\\build\\classes\\edu\\icons8_back_to_30px.png")); // NOI18N
+        Back.setText("Back");
+        Back.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                exitMouseClicked(evt);
+                BackMouseClicked(evt);
             }
         });
-        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 580, 60, -1));
+        jPanel1.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 580, 70, -1));
 
-        ManagerPage.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        ManagerPage.setText("Professor Page");
-        jPanel1.add(ManagerPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 130, -1));
+        ManagerPage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ManagerPage.setForeground(new java.awt.Color(255, 255, 255));
+        ManagerPage.setText("Professors");
+        jPanel1.add(ManagerPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 60, -1));
 
         logout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/icons8_sign_out_30px.png"))); // NOI18N
@@ -115,10 +171,6 @@ public class Professor extends javax.swing.JFrame {
         });
         jPanel1.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 90, -1));
 
-        welcome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        welcome.setText("Welcome");
-        jPanel1.add(welcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 70, 20));
-
         surname.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         surname.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(surname, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 150, 20));
@@ -126,6 +178,10 @@ public class Professor extends javax.swing.JFrame {
         name.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         name.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 150, 20));
+
+        ManagerPage1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ManagerPage1.setText("Admin Page");
+        jPanel1.add(ManagerPage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 130, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 660));
 
@@ -144,46 +200,57 @@ public class Professor extends javax.swing.JFrame {
         jLabel3.setText("School Managment Application");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 270, 30));
 
-        Courses.setBackground(new java.awt.Color(33, 166, 230));
-        Courses.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Courses.setForeground(new java.awt.Color(255, 255, 255));
-        Courses.setText("My Courses");
-        jPanel2.add(Courses, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 190, 90));
+        Professors.setBackground(new java.awt.Color(33, 166, 230));
+        Professors.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Professors.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Email", "Type of User"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
-        announcement.setBackground(new java.awt.Color(33, 166, 230));
-        announcement.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        announcement.setForeground(new java.awt.Color(255, 255, 255));
-        announcement.setText("Edit Courses");
-        announcement.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                announcementActionPerformed(evt);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jPanel2.add(announcement, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 180, 90));
+        Professors.setGridColor(new java.awt.Color(255, 255, 255));
+        Professors.getTableHeader().setResizingAllowed(false);
+        Professors.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(Professors);
+        if (Professors.getColumnModel().getColumnCount() > 0) {
+            Professors.getColumnModel().getColumn(0).setResizable(false);
+            Professors.getColumnModel().getColumn(0).setPreferredWidth(0);
+            Professors.getColumnModel().getColumn(1).setResizable(false);
+            Professors.getColumnModel().getColumn(2).setResizable(false);
+        }
 
-        calendar.setBackground(new java.awt.Color(33, 166, 230));
-        calendar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        calendar.setForeground(new java.awt.Color(255, 255, 255));
-        calendar.setText("Personal Calendar");
-        jPanel2.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 190, 90));
-
-        library.setBackground(new java.awt.Color(33, 166, 230));
-        library.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        library.setForeground(new java.awt.Color(255, 255, 255));
-        library.setText("Test");
-        jPanel2.add(library, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, 180, 90));
-
-        profaccount.setBackground(new java.awt.Color(33, 166, 230));
-        profaccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        profaccount.setForeground(new java.awt.Color(255, 255, 255));
-        profaccount.setText("Insert Course");
-        jPanel2.add(profaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 180, 90));
-
-        library1.setBackground(new java.awt.Color(33, 166, 230));
-        library1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        library1.setForeground(new java.awt.Color(255, 255, 255));
-        library1.setText("Homework");
-        jPanel2.add(library1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, 190, 90));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 650, 270));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 800, 660));
 
@@ -191,9 +258,11 @@ public class Professor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_exitMouseClicked
+    private void BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseClicked
+        AdminCreateProf a = new AdminCreateProf();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BackMouseClicked
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
        
@@ -209,10 +278,6 @@ public class Professor extends javax.swing.JFrame {
         
     }    
          
-    private void announcementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_announcementActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_announcementActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -230,14 +295,46 @@ public class Professor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Professor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCreateProf_Professors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Professor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCreateProf_Professors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Professor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCreateProf_Professors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Professor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCreateProf_Professors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -274,29 +371,25 @@ public class Professor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Professor().setVisible(true);
+                new AdminCreateProf_Professors().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Courses;
+    private javax.swing.JLabel Back;
     private javax.swing.JLabel ManagerPage;
-    private javax.swing.JButton announcement;
-    private javax.swing.JButton calendar;
-    private javax.swing.JLabel exit;
+    private javax.swing.JLabel ManagerPage1;
+    private javax.swing.JTable Professors;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton library;
-    private javax.swing.JButton library1;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel name;
-    private javax.swing.JButton profaccount;
     private javax.swing.JLabel surname;
-    private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
 }
