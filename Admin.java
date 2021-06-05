@@ -76,6 +76,8 @@ public class Admin extends javax.swing.JFrame {
         announcement = new javax.swing.JButton();
         calendar = new javax.swing.JButton();
         profaccount = new javax.swing.JButton();
+        professors = new javax.swing.JButton();
+        students = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -150,7 +152,7 @@ public class Admin extends javax.swing.JFrame {
                 staccountActionPerformed(evt);
             }
         });
-        jPanel2.add(staccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 190, 90));
+        jPanel2.add(staccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 190, 90));
 
         announcement.setBackground(new java.awt.Color(33, 166, 230));
         announcement.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -161,13 +163,18 @@ public class Admin extends javax.swing.JFrame {
                 announcementActionPerformed(evt);
             }
         });
-        jPanel2.add(announcement, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, 190, 90));
+        jPanel2.add(announcement, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 190, 90));
 
         calendar.setBackground(new java.awt.Color(33, 166, 230));
         calendar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         calendar.setForeground(new java.awt.Color(255, 255, 255));
         calendar.setText("School Calendar");
-        jPanel2.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, 190, 90));
+        calendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calendarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 460, 190, 90));
 
         profaccount.setBackground(new java.awt.Color(33, 166, 230));
         profaccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -178,7 +185,29 @@ public class Admin extends javax.swing.JFrame {
                 profaccountActionPerformed(evt);
             }
         });
-        jPanel2.add(profaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 180, 90));
+        jPanel2.add(profaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 190, 90));
+
+        professors.setBackground(new java.awt.Color(33, 166, 230));
+        professors.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        professors.setForeground(new java.awt.Color(255, 255, 255));
+        professors.setText("All Professors");
+        professors.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                professorsActionPerformed(evt);
+            }
+        });
+        jPanel2.add(professors, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 190, 90));
+
+        students.setBackground(new java.awt.Color(33, 166, 230));
+        students.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        students.setForeground(new java.awt.Color(255, 255, 255));
+        students.setText("All Students");
+        students.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentsActionPerformed(evt);
+            }
+        });
+        jPanel2.add(students, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 190, 90));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 800, 660));
 
@@ -211,7 +240,9 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_profaccountActionPerformed
 
     private void announcementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_announcementActionPerformed
-        // TODO add your handling code here:
+        AdminAnnouncement a = new AdminAnnouncement();
+        a.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_announcementActionPerformed
 
     private void staccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staccountActionPerformed
@@ -219,6 +250,24 @@ public class Admin extends javax.swing.JFrame {
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_staccountActionPerformed
+
+    private void professorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professorsActionPerformed
+       AdminCreateProf_Professors a = new AdminCreateProf_Professors();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_professorsActionPerformed
+
+    private void studentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentsActionPerformed
+        AdminCreateStu_Students a = new AdminCreateStu_Students();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_studentsActionPerformed
+
+    private void calendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calendarActionPerformed
+       AdminCalendar a = new AdminCalendar();
+       a.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_calendarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,7 +333,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel logout;
     private javax.swing.JLabel name;
     private javax.swing.JButton profaccount;
+    private javax.swing.JButton professors;
     private javax.swing.JButton staccount;
+    private javax.swing.JButton students;
     private javax.swing.JLabel surname;
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables

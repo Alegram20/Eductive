@@ -221,7 +221,7 @@ public class AdminCreateProf_Professors extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "ID", "Email", "Type of User"
+                "AM", "Email", "Type of User"
             }
         ) {
             Class[] types = new Class [] {
@@ -259,7 +259,7 @@ public class AdminCreateProf_Professors extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseClicked
-        AdminCreateProf a = new AdminCreateProf();
+        Admin a = new Admin();
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BackMouseClicked

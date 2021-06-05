@@ -6,19 +6,22 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
-public class AdminCreateStu extends javax.swing.JFrame {
+public class AdminAnnouncement extends javax.swing.JFrame {
     Connection con;
-    PreparedStatement pst;
+    PreparedStatement pst,pst1;
     ResultSet rs;
     
-    public AdminCreateStu() {
+    public AdminAnnouncement() {
         initComponents();
         welcomeuser();
+        category();
     }
 
     
@@ -44,14 +47,39 @@ public class AdminCreateStu extends javax.swing.JFrame {
                     
                     
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdminCreateStu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminAnnouncement.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(AdminCreateStu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminAnnouncement.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
         
     }
+    
+    private void category(){
+         
+           try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection("jdbc:mysql://localhost/eductivedb","root","");
+        pst = con.prepareStatement("select title from announcement");
+     
+        
+        rs=pst.executeQuery();
+        
+        while(rs.next())
+        {
+            tcat.addItem(rs.getString("title"));
+        }
+        
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(AdminAnnouncement.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(AdminAnnouncement.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,15 +97,18 @@ public class AdminCreateStu extends javax.swing.JFrame {
         surname = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
         ManagerPage1 = new javax.swing.JLabel();
+        AllAnn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        profaccount = new javax.swing.JButton();
-        tmail = new javax.swing.JTextField();
-        ttype = new javax.swing.JComboBox<>();
+        upan = new javax.swing.JButton();
+        tdescr = new javax.swing.JTextField();
+        tcat = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        ttitle = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -124,8 +155,19 @@ public class AdminCreateStu extends javax.swing.JFrame {
 
         ManagerPage1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ManagerPage1.setForeground(new java.awt.Color(255, 255, 255));
-        ManagerPage1.setText("Create Student Account");
-        jPanel1.add(ManagerPage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 140, -1));
+        ManagerPage1.setText("Upload Announcement");
+        jPanel1.add(ManagerPage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 130, -1));
+
+        AllAnn.setBackground(new java.awt.Color(0, 0, 0));
+        AllAnn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        AllAnn.setForeground(new java.awt.Color(33, 166, 230));
+        AllAnn.setText("All Announcements");
+        AllAnn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AllAnnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(AllAnn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 140, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 660));
 
@@ -144,34 +186,43 @@ public class AdminCreateStu extends javax.swing.JFrame {
         jLabel3.setText("School Managment Application");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 270, 30));
 
-        profaccount.setBackground(new java.awt.Color(33, 166, 230));
-        profaccount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        profaccount.setForeground(new java.awt.Color(255, 255, 255));
-        profaccount.setText("Create Student Account");
-        profaccount.addActionListener(new java.awt.event.ActionListener() {
+        upan.setBackground(new java.awt.Color(33, 166, 230));
+        upan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        upan.setForeground(new java.awt.Color(255, 255, 255));
+        upan.setText("Upload Announcement");
+        upan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profaccountActionPerformed(evt);
+                upanActionPerformed(evt);
             }
         });
-        jPanel2.add(profaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 530, 210, 60));
+        jPanel2.add(upan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 530, 210, 60));
 
-        tmail.setBackground(new java.awt.Color(33, 166, 230));
-        tmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tmail.setText(" ");
-        jPanel2.add(tmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 310, 40));
+        tdescr.setBackground(new java.awt.Color(33, 166, 230));
+        tdescr.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tdescr.setText(" ");
+        jPanel2.add(tdescr, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 310, 40));
 
-        ttype.setBackground(new java.awt.Color(33, 166, 230));
-        ttype.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        ttype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student" }));
-        jPanel2.add(ttype, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, 310, 40));
+        tcat.setBackground(new java.awt.Color(33, 166, 230));
+        tcat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tcat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jPanel2.add(tcat, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 400, 310, 40));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Type of User");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 110, 30));
+        jLabel1.setText("Category");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 80, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Email");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 90, 30));
+        jLabel4.setText("Description");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 90, 30));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Title");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 40, 30));
+
+        ttitle.setBackground(new java.awt.Color(33, 166, 230));
+        ttitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ttitle.setText(" ");
+        jPanel2.add(ttitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 310, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 800, 660));
 
@@ -199,26 +250,37 @@ public class AdminCreateStu extends javax.swing.JFrame {
         
     }    
          
-    private void profaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profaccountActionPerformed
-          String Email = tmail.getText();
-          String Role = (String) ttype.getSelectedItem();
-        
+    private void upanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upanActionPerformed
+          
+          String title = ttitle.getText();
+          String description = tdescr.getText();
+          String category = (String) tcat.getSelectedItem();
+          
+          Date d= new Date();
+          SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+          String datee = sdf.format(d);
+          
+          
+         
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con=DriverManager.getConnection("jdbc:mysql://localhost/eductivedb","root","");
             
-              if(ttype.getSelectedItem().equals("Student"))
-         {
-             pst =con.prepareStatement("insert into users (email,usertype) values (?,?) ");
+              
+         
+             pst1 =con.prepareStatement("insert into announcement(title,description,category,date) values (?,?,?,?)");
              
              
-             pst.setString(1, Email);
-             pst.setString(2, Role);
-             pst.executeUpdate();
+             pst1.setString(1, title);
+             pst1.setString(2, description);
+             pst1.setString(3, category);
+             pst1.setString(4, datee);
+             
+             pst1.executeUpdate();
              
           
-             JOptionPane.showMessageDialog(this,"Student Account has been created successfully!");
+             JOptionPane.showMessageDialog(this,"Announcement has been uploaded successfully!");
              
              Admin a = new Admin();
              a.setVisible(true);
@@ -230,15 +292,21 @@ public class AdminCreateStu extends javax.swing.JFrame {
             
              
                      
-          }
-         
+          
+        
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Signin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminAnnouncement.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Signin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminAnnouncement.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }//GEN-LAST:event_profaccountActionPerformed
+    }//GEN-LAST:event_upanActionPerformed
+
+    private void AllAnnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllAnnActionPerformed
+       AdminAllAn a = new AdminAllAn();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_AllAnnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,14 +325,78 @@ public class AdminCreateStu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminCreateStu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAnnouncement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminCreateStu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAnnouncement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminCreateStu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAnnouncement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminCreateStu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminAnnouncement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -333,12 +465,13 @@ public class AdminCreateStu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminCreateStu().setVisible(true);
+                new AdminAnnouncement().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AllAnn;
     private javax.swing.JLabel ManagerPage;
     private javax.swing.JLabel ManagerPage1;
     private javax.swing.JLabel back;
@@ -346,15 +479,17 @@ public class AdminCreateStu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel name;
-    private javax.swing.JButton profaccount;
     private javax.swing.JLabel surname;
-    private javax.swing.JTextField tmail;
-    private javax.swing.JComboBox<String> ttype;
+    private javax.swing.JComboBox<String> tcat;
+    private javax.swing.JTextField tdescr;
+    private javax.swing.JTextField ttitle;
+    private javax.swing.JButton upan;
     // End of variables declaration//GEN-END:variables
 }

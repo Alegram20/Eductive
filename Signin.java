@@ -119,7 +119,7 @@ public class Signin extends javax.swing.JFrame {
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 130, 40));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("ID");
+        jLabel4.setText("AM");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 130, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 800, 660));
@@ -166,7 +166,7 @@ public class Signin extends javax.swing.JFrame {
           }
           else
           {
-             JOptionPane.showMessageDialog(this,"Id, Email or role of user are incorrect","Error",JOptionPane.ERROR_MESSAGE); 
+             JOptionPane.showMessageDialog(this,"AM, Email or role of user are incorrect","Error",JOptionPane.ERROR_MESSAGE); 
              id.setText("");
              email.setText("");
                      
@@ -190,7 +190,7 @@ public class Signin extends javax.swing.JFrame {
           }
           else
           {
-             JOptionPane.showMessageDialog(this,"Id, Email or role of user are incorrect","Error",JOptionPane.ERROR_MESSAGE); 
+             JOptionPane.showMessageDialog(this,"AM, Email or role of user are incorrect","Error",JOptionPane.ERROR_MESSAGE); 
              id.setText("");
              email.setText("");
                      
@@ -215,7 +215,7 @@ public class Signin extends javax.swing.JFrame {
           }
           else
           {
-             JOptionPane.showMessageDialog(this,"Id, Email or role of user are incorrect","Error",JOptionPane.ERROR_MESSAGE); 
+             JOptionPane.showMessageDialog(this,"AM, Email or role of user are incorrect","Error",JOptionPane.ERROR_MESSAGE); 
              id.setText("");
              email.setText("");
                      
@@ -241,7 +241,7 @@ public class Signin extends javax.swing.JFrame {
           }
           else
           {
-             JOptionPane.showMessageDialog(this,"Id, Email or role of user are incorrect","Error",JOptionPane.ERROR_MESSAGE); 
+             JOptionPane.showMessageDialog(this,"AM, Email or role of user are incorrect","Error",JOptionPane.ERROR_MESSAGE); 
              id.setText("");
              email.setText("");
                      

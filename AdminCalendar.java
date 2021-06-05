@@ -1,25 +1,33 @@
 
 package edu;
 
-import static edu.Signin.id;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 
-public class AdminCreateProf extends javax.swing.JFrame {
+public class AdminCalendar extends javax.swing.JFrame {
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
     
-    public AdminCreateProf() {
+    public AdminCalendar() {
         initComponents();
         welcomeuser();
+        
     }
 
     
@@ -45,14 +53,68 @@ public class AdminCreateProf extends javax.swing.JFrame {
                     
                     
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdminCreateProf.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminCalendar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(AdminCreateProf.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminCalendar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
         
     }
+    
+    
+    
+    void tableprof(){
+        
+           
+          SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+          String date = sdf.format(jDateChooser1.getDate());
+       
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+              con=DriverManager.getConnection("jdbc:mysql://localhost/eductivedb","root","");
+              pst=con.prepareStatement("select * from announcement where date=?");
+              pst.setString(1, date);
+              rs=pst.executeQuery();
+              
+            
+           
+              DefaultTableModel Df = (DefaultTableModel)Ann.getModel();
+              Df.setRowCount(0);
+              
+              
+              while(rs.next())
+              {
+                  Vector v2 = new Vector();
+               
+               for(int a=1; a<=3; a++)
+               {
+                      v2.add(rs.getString("title")); 
+                   v2.add(rs.getString("description"));
+                    v2.add(rs.getString("category"));
+                    v2.add(rs.getString("date"));
+                     
+                         
+               }
+               
+               
+                Df.addRow(v2);
+                  
+                  
+              }
+          
+   
+          
+          
+          
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(AdminCalendar.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(AdminCalendar.class.getName()).log(Level.SEVERE, null, ex);
+          }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,11 +136,10 @@ public class AdminCreateProf extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        profaccount = new javax.swing.JButton();
-        tmail = new javax.swing.JTextField();
-        ttype = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Ann = new javax.swing.JTable();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -103,8 +164,8 @@ public class AdminCreateProf extends javax.swing.JFrame {
 
         ManagerPage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ManagerPage.setForeground(new java.awt.Color(255, 255, 255));
-        ManagerPage.setText("Create Professor Account");
-        jPanel1.add(ManagerPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 150, -1));
+        ManagerPage.setText("Calendar");
+        jPanel1.add(ManagerPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 60, -1));
 
         logout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/icons8_sign_out_30px.png"))); // NOI18N
@@ -145,34 +206,65 @@ public class AdminCreateProf extends javax.swing.JFrame {
         jLabel3.setText("School Managment Application");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 270, 30));
 
-        profaccount.setBackground(new java.awt.Color(33, 166, 230));
-        profaccount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        profaccount.setForeground(new java.awt.Color(255, 255, 255));
-        profaccount.setText("Create Professor Account");
-        profaccount.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setBackground(new java.awt.Color(33, 166, 230));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("Select Date");
+        jButton1.setToolTipText("");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profaccountActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(profaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 530, 210, 60));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, -1, -1));
 
-        tmail.setBackground(new java.awt.Color(33, 166, 230));
-        tmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tmail.setText(" ");
-        jPanel2.add(tmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 310, 40));
+        Ann.setBackground(new java.awt.Color(33, 166, 230));
+        Ann.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Ann.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title", "Description", "Category", "Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        ttype.setBackground(new java.awt.Color(33, 166, 230));
-        ttype.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        ttype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Professor" }));
-        jPanel2.add(ttype, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, 310, 40));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Type of User");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 110, 30));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Ann.setGridColor(new java.awt.Color(255, 255, 255));
+        Ann.getTableHeader().setResizingAllowed(false);
+        Ann.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(Ann);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Email");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 90, 30));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 650, 270));
+
+        jDateChooser1.setDateFormatString("y MMM d");
+        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 230, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 800, 660));
 
@@ -181,7 +273,7 @@ public class AdminCreateProf extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseClicked
-         Admin a = new Admin();
+        Admin a = new Admin();
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BackMouseClicked
@@ -194,53 +286,16 @@ public class AdminCreateProf extends javax.swing.JFrame {
         
         Main b = new Main();
         b.setVisible(true);
-        this.dispose();
+        this.dispose();}
     }//GEN-LAST:event_logoutMouseClicked
 
-        
-    }    
-         
-    private void profaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profaccountActionPerformed
-          String Email = tmail.getText();
-          String Role = (String) ttype.getSelectedItem();
-        
-        
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost/eductivedb","root","");
-            
-              if(ttype.getSelectedItem().equals("Professor"))
-         {
-             pst =con.prepareStatement("insert into users (email,usertype) values (?,?) ");
-             
-             
-             pst.setString(1, Email);
-             pst.setString(2, Role);
-             pst.executeUpdate();
-             
-          
-             JOptionPane.showMessageDialog(this,"Professor Account has been created successfully!");
-             
-             Admin a = new Admin();
-             a.setVisible(true);
-             this.dispose();
-            
-              
-          
-             
-            
-             
-                     
-          }
-         
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Signin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Signin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_profaccountActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        tableprof();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
+        
+       
+         
     /**
      * @param args the command line arguments
      */
@@ -250,22 +305,103 @@ public class AdminCreateProf extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminCreateProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminCreateProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminCreateProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminCreateProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+   
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -302,28 +438,27 @@ public class AdminCreateProf extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminCreateProf().setVisible(true);
+                new AdminCalendar().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Ann;
     private javax.swing.JLabel Back;
     private javax.swing.JLabel ManagerPage;
     private javax.swing.JLabel ManagerPage1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel name;
-    private javax.swing.JButton profaccount;
     private javax.swing.JLabel surname;
-    private javax.swing.JTextField tmail;
-    private javax.swing.JComboBox<String> ttype;
     // End of variables declaration//GEN-END:variables
 }
