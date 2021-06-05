@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2021 at 12:26 PM
+-- Generation Time: Jun 05, 2021 at 05:59 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -39,6 +39,29 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `name`, `surname`) VALUES
 (1, 'Alexandros', 'Grammatikopoulos');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcement`
+--
+
+CREATE TABLE `announcement` (
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `announcement`
+--
+
+INSERT INTO `announcement` (`title`, `description`, `category`, `date`) VALUES
+(' English 2', ' 10:00 19/6', 'Exams', '2021-06-05'),
+('Exams', 'Exams start at 11/6', NULL, '2021-06-05'),
+('Maths', '12:00 24/6', 'Exams', '2021-06-04'),
+('Physics', '9:00 22/6', 'Exams', '2021-06-05');
 
 -- --------------------------------------------------------
 
@@ -139,6 +162,13 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `announcement`
+--
+ALTER TABLE `announcement`
+  ADD PRIMARY KEY (`title`),
+  ADD KEY `cat_ann` (`category`);
+
+--
 -- Indexes for table `parent`
 --
 ALTER TABLE `parent`
@@ -181,6 +211,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `admin`
   ADD CONSTRAINT `manager_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `announcement`
+--
+ALTER TABLE `announcement`
+  ADD CONSTRAINT `cat_ann` FOREIGN KEY (`category`) REFERENCES `announcement` (`title`);
 
 --
 -- Constraints for table `parent`
