@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2021 at 05:59 PM
+-- Generation Time: Jun 10, 2021 at 06:35 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -62,6 +62,47 @@ INSERT INTO `announcement` (`title`, `description`, `category`, `date`) VALUES
 ('Exams', 'Exams start at 11/6', NULL, '2021-06-05'),
 ('Maths', '12:00 24/6', 'Exams', '2021-06-04'),
 ('Physics', '9:00 22/6', 'Exams', '2021-06-05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course`
+--
+
+CREATE TABLE `course` (
+  `professor_user` int(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`professor_user`, `title`, `description`, `start_date`, `end_date`) VALUES
+(2, 'Maths', 'Bernouli ', '2021-06-11', '2021-06-24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `homework`
+--
+
+CREATE TABLE `homework` (
+  `home_professor` int(255) NOT NULL,
+  `home_course` varchar(255) NOT NULL,
+  `home_title` varchar(255) NOT NULL,
+  `home_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `homework`
+--
+
+INSERT INTO `homework` (`home_professor`, `home_course`, `home_title`, `home_date`) VALUES
+(2, 'Maths', 'Exercise 2.1 from Bayes Theory', '2021-06-11');
 
 -- --------------------------------------------------------
 
@@ -127,6 +168,26 @@ INSERT INTO `student` (`id`, `name`, `surname`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `test`
+--
+
+CREATE TABLE `test` (
+  `prof_user` int(255) NOT NULL,
+  `course_test` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `test_date` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `test`
+--
+
+INSERT INTO `test` (`prof_user`, `course_test`, `title`, `test_date`) VALUES
+(2, 'Maths', 'June 2021 Math Exam', '2021-06-18');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -169,6 +230,21 @@ ALTER TABLE `announcement`
   ADD KEY `cat_ann` (`category`);
 
 --
+-- Indexes for table `course`
+--
+ALTER TABLE `course`
+  ADD PRIMARY KEY (`title`),
+  ADD KEY `profuser` (`professor_user`);
+
+--
+-- Indexes for table `homework`
+--
+ALTER TABLE `homework`
+  ADD PRIMARY KEY (`home_title`),
+  ADD KEY `homeprof` (`home_professor`),
+  ADD KEY `homecourse` (`home_course`);
+
+--
 -- Indexes for table `parent`
 --
 ALTER TABLE `parent`
@@ -185,6 +261,14 @@ ALTER TABLE `professor`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `test`
+--
+ALTER TABLE `test`
+  ADD PRIMARY KEY (`title`),
+  ADD KEY `testprof` (`prof_user`),
+  ADD KEY `testcourse` (`course_test`);
 
 --
 -- Indexes for table `users`
@@ -219,6 +303,19 @@ ALTER TABLE `announcement`
   ADD CONSTRAINT `cat_ann` FOREIGN KEY (`category`) REFERENCES `announcement` (`title`);
 
 --
+-- Constraints for table `course`
+--
+ALTER TABLE `course`
+  ADD CONSTRAINT `profuser` FOREIGN KEY (`professor_user`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `homework`
+--
+ALTER TABLE `homework`
+  ADD CONSTRAINT `homecourse` FOREIGN KEY (`home_course`) REFERENCES `course` (`title`),
+  ADD CONSTRAINT `homeprof` FOREIGN KEY (`home_professor`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `parent`
 --
 ALTER TABLE `parent`
@@ -235,6 +332,13 @@ ALTER TABLE `professor`
 --
 ALTER TABLE `student`
   ADD CONSTRAINT `student_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `test`
+--
+ALTER TABLE `test`
+  ADD CONSTRAINT `testcourse` FOREIGN KEY (`course_test`) REFERENCES `course` (`title`),
+  ADD CONSTRAINT `testprof` FOREIGN KEY (`prof_user`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
