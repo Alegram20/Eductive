@@ -1,7 +1,7 @@
 # Eductive
 
 
-One semester project for Software Engineering course for Ceid, University of Patras.
+Our semester project for Software Engineering course for Ceid, University of Patras.
 
 
 
@@ -15,5 +15,5 @@ One semester project for Software Engineering course for Ceid, University of Pat
 6. In Libraries import .jar file -> mysql-connector-java-8.0.18.
 7. Go to Services->Databases->New Connection-> MySQL (Connector/J Driver)->Add mysql-connector-java-8.0.18-> OK
 8. Right click in the Database which we uploaded and select Connect
-9. Credentials are username: "root" and password: "" , the OK
+9. Credentials are username: "root" and password: "" , then OK
 10. After all, if we do not have an error, we can Build and Run our project.
