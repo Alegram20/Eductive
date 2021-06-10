@@ -73,11 +73,10 @@ public class Parent extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        staccount = new javax.swing.JButton();
+        appointments = new javax.swing.JButton();
+        editappointments = new javax.swing.JButton();
         announcement = new javax.swing.JButton();
-        calendar = new javax.swing.JButton();
-        Calendar = new javax.swing.JButton();
-        profaccount = new javax.swing.JButton();
+        makeanappointments = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -143,40 +142,49 @@ public class Parent extends javax.swing.JFrame {
         jLabel3.setText("School Managment Application");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 270, 30));
 
-        staccount.setBackground(new java.awt.Color(33, 166, 230));
-        staccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        staccount.setForeground(new java.awt.Color(255, 255, 255));
-        staccount.setText("Appointments");
-        jPanel2.add(staccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 190, 90));
+        appointments.setBackground(new java.awt.Color(33, 166, 230));
+        appointments.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        appointments.setForeground(new java.awt.Color(255, 255, 255));
+        appointments.setText("Appointments");
+        appointments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentsActionPerformed(evt);
+            }
+        });
+        jPanel2.add(appointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, 190, 90));
+
+        editappointments.setBackground(new java.awt.Color(33, 166, 230));
+        editappointments.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        editappointments.setForeground(new java.awt.Color(255, 255, 255));
+        editappointments.setText("Edit Appointments");
+        editappointments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editappointmentsActionPerformed(evt);
+            }
+        });
+        jPanel2.add(editappointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 190, 90));
 
         announcement.setBackground(new java.awt.Color(33, 166, 230));
         announcement.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         announcement.setForeground(new java.awt.Color(255, 255, 255));
-        announcement.setText("Edit Appointments");
+        announcement.setText("Announcement");
         announcement.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 announcementActionPerformed(evt);
             }
         });
-        jPanel2.add(announcement, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 190, 90));
+        jPanel2.add(announcement, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, 190, 90));
 
-        calendar.setBackground(new java.awt.Color(33, 166, 230));
-        calendar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        calendar.setForeground(new java.awt.Color(255, 255, 255));
-        calendar.setText("Announcement");
-        jPanel2.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, 190, 90));
-
-        Calendar.setBackground(new java.awt.Color(33, 166, 230));
-        Calendar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Calendar.setForeground(new java.awt.Color(255, 255, 255));
-        Calendar.setText("e-Library");
-        jPanel2.add(Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 190, 90));
-
-        profaccount.setBackground(new java.awt.Color(33, 166, 230));
-        profaccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        profaccount.setForeground(new java.awt.Color(255, 255, 255));
-        profaccount.setText("Make an Appointment");
-        jPanel2.add(profaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 180, 90));
+        makeanappointments.setBackground(new java.awt.Color(33, 166, 230));
+        makeanappointments.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        makeanappointments.setForeground(new java.awt.Color(255, 255, 255));
+        makeanappointments.setText("Make an Appointment");
+        makeanappointments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makeanappointmentsActionPerformed(evt);
+            }
+        });
+        jPanel2.add(makeanappointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 180, 90));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 800, 660));
 
@@ -202,8 +210,28 @@ public class Parent extends javax.swing.JFrame {
         
     }    
          
+    private void editappointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editappointmentsActionPerformed
+         ParentEditAppointment b = new ParentEditAppointment();
+        b.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_editappointmentsActionPerformed
+
+    private void makeanappointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeanappointmentsActionPerformed
+        ParentAppointment b = new ParentAppointment();
+        b.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_makeanappointmentsActionPerformed
+
+    private void appointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentsActionPerformed
+        ParentMyAppointments b = new ParentMyAppointments();
+        b.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_appointmentsActionPerformed
+
     private void announcementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_announcementActionPerformed
-        // TODO add your handling code here:
+        ParentAnnouncements b = new ParentAnnouncements();
+        b.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_announcementActionPerformed
 
     /**
@@ -273,10 +301,10 @@ public class Parent extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Calendar;
     private javax.swing.JLabel ManagerPage;
     private javax.swing.JButton announcement;
-    private javax.swing.JButton calendar;
+    private javax.swing.JButton appointments;
+    private javax.swing.JButton editappointments;
     private javax.swing.JLabel exit;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -285,9 +313,8 @@ public class Parent extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel logout;
+    private javax.swing.JButton makeanappointments;
     private javax.swing.JLabel name;
-    private javax.swing.JButton profaccount;
-    private javax.swing.JButton staccount;
     private javax.swing.JLabel surname;
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
