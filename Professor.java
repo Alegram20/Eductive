@@ -148,6 +148,11 @@ public class Professor extends javax.swing.JFrame {
         Courses.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Courses.setForeground(new java.awt.Color(255, 255, 255));
         Courses.setText("My Courses");
+        Courses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CoursesActionPerformed(evt);
+            }
+        });
         jPanel2.add(Courses, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 190, 90));
 
         announcement.setBackground(new java.awt.Color(33, 166, 230));
@@ -165,24 +170,44 @@ public class Professor extends javax.swing.JFrame {
         calendar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         calendar.setForeground(new java.awt.Color(255, 255, 255));
         calendar.setText("Personal Calendar");
+        calendar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                calendarMouseClicked(evt);
+            }
+        });
         jPanel2.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 190, 90));
 
         library.setBackground(new java.awt.Color(33, 166, 230));
         library.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         library.setForeground(new java.awt.Color(255, 255, 255));
         library.setText("Test");
+        library.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                libraryActionPerformed(evt);
+            }
+        });
         jPanel2.add(library, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, 180, 90));
 
         profaccount.setBackground(new java.awt.Color(33, 166, 230));
         profaccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         profaccount.setForeground(new java.awt.Color(255, 255, 255));
         profaccount.setText("Insert Course");
+        profaccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profaccountActionPerformed(evt);
+            }
+        });
         jPanel2.add(profaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 180, 90));
 
         library1.setBackground(new java.awt.Color(33, 166, 230));
         library1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         library1.setForeground(new java.awt.Color(255, 255, 255));
         library1.setText("Homework");
+        library1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                library1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(library1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, 190, 90));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 800, 660));
@@ -210,8 +235,40 @@ public class Professor extends javax.swing.JFrame {
     }    
          
     private void announcementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_announcementActionPerformed
-        // TODO add your handling code here:
+        ProfessorEditMyCourses a = new ProfessorEditMyCourses();
+        a.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_announcementActionPerformed
+
+    private void profaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profaccountActionPerformed
+        ProfessorInsertCourse a = new ProfessorInsertCourse();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_profaccountActionPerformed
+
+    private void CoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CoursesActionPerformed
+        ProfessorMyCourses a = new ProfessorMyCourses();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CoursesActionPerformed
+
+    private void libraryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libraryActionPerformed
+        ProfessorTest a = new ProfessorTest();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_libraryActionPerformed
+
+    private void calendarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calendarMouseClicked
+        ProfessorCalendar a = new ProfessorCalendar();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_calendarMouseClicked
+
+    private void library1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_library1ActionPerformed
+         ProfessorHomework a = new ProfessorHomework();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_library1ActionPerformed
 
     /**
      * @param args the command line arguments
